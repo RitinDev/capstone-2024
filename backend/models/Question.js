@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const questionSchema = new Schema({
     content: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     submittedUser: {
         type: Schema.Types.ObjectId,
