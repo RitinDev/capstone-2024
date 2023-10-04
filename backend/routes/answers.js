@@ -33,12 +33,18 @@ router.post('/', [auth, [
         });
 
         const answer = await newAnswer.save();
+
+        // Add answer's ID to the associated question's answers array
+        question.answers.push(answer._id);
+        await question.save();
+
         res.json(answer);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
 });
+
 
 // @route   GET api/answers/:id
 // @desc    Retrieve an answer and its associated question
