@@ -1,14 +1,19 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
+import { useEffect } from 'react';
 
-function PrivateRouteWrapper({ children }) {
+function PrivateRouteWrapper() {
     const { isAuthenticated } = useAuth();
-    
+
+    useEffect(() => {
+        console.log('PrivateRouteWrapper: ', isAuthenticated);
+    }, [isAuthenticated]);
+
     if (!isAuthenticated) {
         return <Navigate to="/login" replace />;
     }
 
-    return children;
+    return <Outlet />;
 }
 
 export default PrivateRouteWrapper;

@@ -7,6 +7,7 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+
     const { login } = useAuth();
 
     const handleLogin = async () => {
@@ -14,7 +15,7 @@ function Login() {
             const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
             if (response.data && response.data.token) {
                 localStorage.setItem('token', response.data.token);
-                login();
+                login();  // IMPORTANT: Mark the user as authenticated
                 window.location.href = "/";
             }
         } catch (err) {
