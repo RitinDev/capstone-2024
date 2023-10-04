@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../styles/login.css'
 import axios from 'axios';
 
-function SignUp() {
+function Signup() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(''); // To display error messages
 
-    const handleSignUp = async () => {
+    const handleSignup = async () => {
         if (password !== confirmPassword) {
             setError('Passwords do not match');
             return;
@@ -102,7 +102,7 @@ function SignUp() {
                                 />
                             </div>
 
-                            <button className="btn btn-outline-light mt-4 px-5" type="button" onClick={handleSignUp}>
+                            <button className="btn btn-outline-light mt-4 px-5" type="button" onClick={handleSignup}>
                                 Sign Up
                             </button>
                         </div>
@@ -113,4 +113,4 @@ function SignUp() {
     );
 }
 
-export default SignUp;
+export default Signup;
