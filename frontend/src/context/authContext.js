@@ -11,12 +11,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = () => {
     setIsAuthenticated(true);
-    // store the JWT token here if needed
   };
 
   const logout = () => {
+    localStorage.removeItem('token');  // Clear the token from localStorage
     setIsAuthenticated(false);
-    // Clear any tokens or user data
   };
 
   return (
