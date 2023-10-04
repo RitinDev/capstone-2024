@@ -43,7 +43,7 @@ function Signup() {
                     <div className="card bg-dark text-white my-5 mx-auto" style={{ borderRadius: '1rem', maxWidth: '400px' }}>
                         <div className="card-body p-5 d-flex flex-column align-items-center mx-auto w-100">
                             <h2 className="fw-bold mb-2 text-uppercase">Sign Up</h2>
-                            <p className="text-white-50 mb-4">Please create your account!</p>
+                            <p className="text-white-50 mb-4">Create your account!</p>
 
                             {error && <div className="alert alert-danger">{error}</div>}
 
@@ -91,7 +91,7 @@ function Signup() {
                                 />
                             </div>
 
-                            <div className="mb-4">
+                            <div className="mb-2">
                                 <input
                                     className="form-control form-control-lg"
                                     type="password"
@@ -105,6 +105,9 @@ function Signup() {
                             <button className="btn btn-outline-light mt-4 px-5" type="button" onClick={handleSignup}>
                                 Sign Up
                             </button>
+                            <div className='mt-2'>
+                                <p className="mb-0 mt-1"><a href="/login" className="text-white-50 text-decoration-none">Sign in instead</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
