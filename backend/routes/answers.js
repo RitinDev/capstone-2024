@@ -20,12 +20,7 @@ router.post('/', [auth, [
     try {
         const { content, associatedQuestion } = req.body;
 
-        // Check if question exists
-        const question = await Question.findById(associatedQuestion);
-        if (!question) {
-            return res.status(404).json({ msg: 'Question not found' });
-        }
-
+        // Create new answer
         const newAnswer = new Answer({
             content,
             associatedQuestion,
@@ -34,9 +29,12 @@ router.post('/', [auth, [
 
         const answer = await newAnswer.save();
 
-        // Add answer's ID to the associated question's answers array
-        question.answers.push(answer._id);
-        await question.save();
+        // Find the associated question and update its answers array
+        const question = await Question.findById(associatedQuestion);
+        if (question && !question.answers.includes(answer._id)) {
+            question.answers.push(answer._id);
+            await question.save();
+        }
 
         res.json(answer);
     } catch (err) {
@@ -44,7 +42,6 @@ router.post('/', [auth, [
         res.status(500).send('Server Error');
     }
 });
-
 
 // @route   GET api/answers/:id
 // @desc    Retrieve an answer and its associated question

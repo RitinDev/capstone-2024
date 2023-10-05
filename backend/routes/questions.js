@@ -6,7 +6,7 @@ const Question = require('../models/Question');
 const router = express.Router();
 
 // @route   POST api/questions
-// @desc    Create a new question
+// @desc    Create a new question or get an existing one
 router.post('/', [auth, [
     check('content', 'Content of the question is required').notEmpty()
 ]], async (req, res) => {
@@ -16,18 +16,20 @@ router.post('/', [auth, [
     }
 
     try {
-        // Create new question
-        const newQuestion = new Question({
-            content: req.body.content,
-            submittedUser: req.user.id
-        });
-
-        const question = await newQuestion.save();
+        // Try to find an existing question
+        let question = await Question.findOne({ content: req.body.content });
+        
+        if (!question) {
+            // If not found, create a new one
+            question = new Question({
+                content: req.body.content,
+                submittedUser: req.user.id
+            });
+            await question.save();
+        }
+        
         res.json(question);
     } catch (err) {
-        if (err.code === 11000) {
-            return res.status(400).json({ msg: 'Question already exists. Please submit a unique question.' });
-        }
         console.error(err.message);
         res.status(500).send('Server Error');
     }
