@@ -43,14 +43,26 @@ router.post('/', [auth, [
     }
 });
 
-// @route   GET api/answers/random
-// @desc    Get a random answer
+// @route   GET api/answers/random?questionId=<questionId>
+// @desc    Get a random answer based on the associated question
 router.get('/random', async (req, res) => {
     try {
-        const count = await Answer.countDocuments();
-        const random = Math.floor(Math.random() * count);
-        const answer = await Answer.findOne().skip(random);
+        const questionId = req.query.questionId;
+
+        // Fetch the question first
+        const question = await Question.findById(questionId);
+        if (!question || !question.answers.length) {
+            return res.status(404).json({ msg: "No answers found for the given question" });
+        }
+
+        // Get a random index from the answers array
+        const randomIndex = Math.floor(Math.random() * question.answers.length);
+        const answerId = question.answers[randomIndex];
+
+        // Fetch the random answer
+        const answer = await Answer.findById(answerId);
         res.json(answer);
+        
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
