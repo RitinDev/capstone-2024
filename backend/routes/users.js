@@ -94,7 +94,7 @@ router.post('/login', [
             { expiresIn: 3600 },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token });
+                res.json({ token: token, userID: user.id });
             }
         );
     } catch (err) {

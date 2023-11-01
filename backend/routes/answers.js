@@ -43,6 +43,20 @@ router.post('/', [auth, [
     }
 });
 
+// @route   GET api/answers/random
+// @desc    Get a random answer
+router.get('/random', async (req, res) => {
+    try {
+        const count = await Answer.countDocuments();
+        const random = Math.floor(Math.random() * count);
+        const answer = await Answer.findOne().skip(random);
+        res.json(answer);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 // @route   GET api/answers/:id
 // @desc    Retrieve an answer and its associated question
 router.get('/:id', async (req, res) => {

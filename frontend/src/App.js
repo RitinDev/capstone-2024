@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import SubmitQA from './pages/SubmitQA';
 import RandomQA from './pages/RandomQA';
+import ValidateQA from './pages/ValidateQA';
 import PrivateRouteWrapper from './utils/PrivateRoute';
 import { AuthProvider } from './context/authContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route path="/random-qa" element={<PrivateRouteWrapper />}>
             <Route index element={<RandomQA />} />
+          </Route>
+          <Route path="/validate-qa" element={<PrivateRouteWrapper />}>
+            <Route index element={<ValidateQA />} />
           </Route>
         </Routes>
       </Router>
