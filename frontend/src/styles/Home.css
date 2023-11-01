@@ -1,0 +1,46 @@
+.home-header {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.subtext {
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.custom-btn {
+    display: block;
+    width: 210px;
+    height: 70px;
+    margin: 15px auto;
+    background-color: transparent;
+    text-align: center;
+    border-radius: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.custom-btn span {
+    margin-left: 10px;
+}
+
+.custom-btn span, .custom-btn svg {
+    vertical-align: middle;
+}
