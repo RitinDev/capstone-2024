@@ -16,6 +16,7 @@ app.use(cors());               // Enable CORS
 app.use('/api/users', require('./routes/users'));
 app.use('/api/questions', require('./routes/questions'));
 app.use('/api/answers', require('./routes/answers'));
+app.use('/api/validate', require('./routes/validate'));
 
 const PORT = process.env.PORT || 5000;
 
