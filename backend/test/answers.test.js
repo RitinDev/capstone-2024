@@ -5,6 +5,8 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
+const randomAnswer = `${Math.floor(Math.random() * 100) + 1} is the answer!`;
+
 describe('Answers API', () => {
     let jwtToken;
 
@@ -30,13 +32,13 @@ describe('Answers API', () => {
                 .post('/api/answers')
                 .set('x-auth-token', jwtToken)
                 .send({
-                    content: '42 is the answer!',
-                    associatedQuestion: '6542eb8c5a6afb759fb331c7' // The question's _id you provided
+                    content: `${randomAnswer}`,
+                    associatedQuestion: '6542f009f81ec8ee71e5abed' // The question's _id you provided
                 })
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.have.property('content');
-                    res.body.content.should.be.eql('42 is the answer!');
+                    res.body.content.should.be.eql(`${randomAnswer}`);
                     done();
                 });
         });
@@ -46,7 +48,7 @@ describe('Answers API', () => {
         it('should get a random answer based on the associated question', (done) => {
             chai.request(server)
                 .get('/api/answers/random')
-                .query({ questionId: '6542eb8c5a6afb759fb331c7' }) // Using query string
+                .query({ questionId: '6542f009f81ec8ee71e5abed' }) // Using query string
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.have.property('content');
