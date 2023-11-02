@@ -40,14 +40,14 @@ const ValidateQA = () => {
 
     const validateQA = async () => {
         const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId');
+        const userID = localStorage.getItem('userID');
 
         try {
-            await axios.post(`http://localhost:5000/api/validate/question/${randomQuestion._id}`, { userId },
+            await axios.post(`http://localhost:5000/api/validate/question/${randomQuestion._id}`, { userID },
                 { headers: { 'x-auth-token': token } }
             );
 
-            await axios.post(`http://localhost:5000/api/validate/answer/${randomAnswer._id}`, { userId },
+            await axios.post(`http://localhost:5000/api/validate/answer/${randomAnswer._id}`, { userID },
                 { headers: { 'x-auth-token': token } }
             );
 

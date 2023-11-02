@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 describe('Validation API', () => {
 
-    const userId = '651dc5670ce39f3ffe3bb45b'; // Replace with a valid user ID
+    const userID = '651dc5670ce39f3ffe3bb45b'; // Replace with a valid user ID
     const questionId = '6542f009f81ec8ee71e5abed';
     const answerId = '6542f07712953bcded38a4b2';
 
@@ -15,7 +15,7 @@ describe('Validation API', () => {
         it('should validate a question successfully', (done) => {
             chai.request(server)
                 .post(`/validate/question/${questionId}`)
-                .send({ userId: userId, questionId: questionId })
+                .send({ userID: userID, questionId: questionId })
                 .end((err, res) => {
                     expect(res).to.have.status(200);
                     expect(res.body).to.have.property('message', 'Question validated successfully!');
@@ -26,7 +26,7 @@ describe('Validation API', () => {
         it('should not allow a user to validate a question twice', (done) => {
             chai.request(server)
                 .post(`/validate/question/${questionId}`)
-                .send({ userId })
+                .send({ userID })
                 .end((err, res) => {
                     expect(res).to.have.status(400);
                     expect(res.body).to.have.property('message', 'User already validated this question.');
@@ -38,7 +38,7 @@ describe('Validation API', () => {
             const invalidId = '123456789012345678901234'; // Mock invalid ID
             chai.request(server)
                 .post(`/validate/question/${invalidId}`)
-                .send({ userId: invalidId })
+                .send({ userID: invalidId })
                 .end((err, res) => {
                     expect(res).to.have.status(404);
                     expect(res.body).to.have.property('message', 'User or Question not found.');
@@ -51,7 +51,7 @@ describe('Validation API', () => {
         it('should validate an answer successfully', (done) => {
             chai.request(server)
                 .post(`/validate/answer/${answerId}`)
-                .send({ userId })
+                .send({ userID })
                 .end((err, res) => {
                     expect(res).to.have.status(200);
                     expect(res.body).to.have.property('message', 'Answer validated successfully!');
@@ -62,7 +62,7 @@ describe('Validation API', () => {
         it('should not allow a user to validate an answer twice', (done) => {
             chai.request(server)
                 .post(`/validate/answer/${answerId}`)
-                .send({ userId })
+                .send({ userID })
                 .end((err, res) => {
                     expect(res).to.have.status(400);
                     expect(res.body).to.have.property('message', 'User already validated this answer.');
@@ -74,7 +74,7 @@ describe('Validation API', () => {
             const invalidId = '123456789012345678901234'; // Mock invalid ID
             chai.request(server)
                 .post(`/validate/answer/${invalidId}`)
-                .send({ userId: invalidId })
+                .send({ userID: invalidId })
                 .end((err, res) => {
                     expect(res).to.have.status(404);
                     expect(res.body).to.have.property('message', 'User or Answer not found.');

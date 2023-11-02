@@ -15,7 +15,7 @@ function Login() {
             const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
             if (response.data && response.data.token) {
                 localStorage.setItem('token', response.data.token);
-                localStorage.setItem('userId', response.data.userId);
+                localStorage.setItem('userID', response.data.userID);
                 login();  // IMPORTANT: Mark the user as authenticated
                 window.location.href = "/";
             }

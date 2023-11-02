@@ -7,7 +7,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token') && !!localStorage.getItem('userID'));
 
   const login = () => {
     setIsAuthenticated(true);
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');  // Clear the token from localStorage
-    localStorage.removeItem('userId'); // Clear the user ID from localStorage
+    localStorage.removeItem('userID'); // Clear the user ID from localStorage
     setIsAuthenticated(false);
   };
 
