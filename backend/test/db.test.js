@@ -23,4 +23,18 @@ describe('Database Connection', () => {
 
         consoleLogSpy.restore();
     });
+
+    it('should handle database connection errors gracefully', async () => {
+        mongooseConnectStub = sinon.stub(mongoose, 'connect').rejects(new Error('Test error'));
+
+        let consoleErrorSpy = sinon.spy(console, 'error');
+        try {
+            await connectDB();
+        } catch (e) {
+            expect(consoleErrorSpy.calledOnceWith('Test error')).to.be.true;
+            expect(e.message).to.equal('Test error');
+        }
+
+        consoleErrorSpy.restore();
+    });
 });
