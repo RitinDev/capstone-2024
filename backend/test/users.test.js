@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../server'); 
+const server = require('../server');
 const expect = chai.expect;
 
 chai.use(chaiHttp);
@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 const randomEmail = Math.random().toString(36).substring(2, 15) + '@test.com';
 
 describe('Users API', () => {
-    
+
     // Testing the POST /signup endpoint
     describe('POST /signup', () => {
 
@@ -81,6 +81,19 @@ describe('Users API', () => {
                     expect(res.body).to.have.property('msg', 'Invalid credentials');
                     done();
                 });
+        });
+
+        after(async () => {
+            const User = require('../models/User'); // Adjust the path to your User model
+
+            try {
+                await User.findOneAndDelete({ email: randomEmail });
+
+                // Optional: If you want to disconnect after tests
+                // mongoose.disconnect();
+            } catch (err) {
+                console.error('Error during cleanup:', err);
+            }
         });
 
     });
