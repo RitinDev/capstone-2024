@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ValidifyGPT",
+  "name": "ValidifyGPT: LLM Data Collection and Validation Tool",
   "icons": [
     {
       "src": "favicon.ico",

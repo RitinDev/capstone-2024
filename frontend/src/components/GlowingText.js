@@ -5,7 +5,7 @@ const GlowingText = ({ text, fontSize = 'calc(1.375rem + 1.5vw)', className }) =
             fontWeight: 700,
             textShadow: '0 0 0.12em #99CCCC',
             fontSize: fontSize,
-            marginBottom: '24px'
+            marginBottom: '1rem'
         }}
         className={className}
     >
