@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import api from '../utils/api';
 
 const ValidateQA = () => {
     const [randomQuestion, setRandomQuestion] = useState(null);
@@ -11,7 +12,7 @@ const ValidateQA = () => {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.get('http://localhost:5000/api/questions/random',
+            const response = await axios.get(`${api.API_BASE_URL}/api/questions/random`,
                 { headers: { 'x-auth-token': token } }
             );
             if (response.data && response.data._id) {
@@ -27,7 +28,7 @@ const ValidateQA = () => {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.get(`http://localhost:5000/api/answers/random?questionId=${questionId}`,
+            const response = await axios.get(`${api.API_BASE_URL}/api/answers/random?questionId=${questionId}`,
                 { headers: { 'x-auth-token': token } }
             );
             if (response.data && response.data.content) {
@@ -43,11 +44,11 @@ const ValidateQA = () => {
         const userID = localStorage.getItem('userID');
 
         try {
-            await axios.post(`http://localhost:5000/api/validate/question/${randomQuestion._id}`, { userID },
+            await axios.post(`${api.API_BASE_URL}/api/validate/question/${randomQuestion._id}`, { userID },
                 { headers: { 'x-auth-token': token } }
             );
 
-            await axios.post(`http://localhost:5000/api/validate/answer/${randomAnswer._id}`, { userID },
+            await axios.post(`${api.API_BASE_URL}/api/validate/answer/${randomAnswer._id}`, { userID },
                 { headers: { 'x-auth-token': token } }
             );
 
@@ -61,6 +62,7 @@ const ValidateQA = () => {
 
     useEffect(() => {
         fetchRandomQuestion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

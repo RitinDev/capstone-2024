@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../utils/api';
 
 function RandomQA() {
     const [showAnswerForm, setShowAnswerForm] = useState(true);
@@ -13,7 +14,7 @@ function RandomQA() {
 
         try {
             const answerResponse = await axios.post(
-                'http://localhost:5000/api/answers',
+                `${api.API_BASE_URL}/api/answers`,
                 { content: answer, associatedQuestion: randomQuestion._id },
                 { headers: { 'x-auth-token': token } }
             );
@@ -32,7 +33,7 @@ function RandomQA() {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.get('http://localhost:5000/api/questions/random',
+            const response = await axios.get(`${api.API_BASE_URL}/api/questions/random`,
                 { headers: { 'x-auth-token': token } }
             );
 

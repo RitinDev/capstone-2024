@@ -2,6 +2,7 @@ import { useState } from 'react';
 import '../styles/login.css'
 import axios from 'axios';
 import GlowingText from '../components/GlowingText';
+import api from '../utils/api';
 
 function Signup() {
     const [firstName, setFirstName] = useState('');
@@ -18,14 +19,14 @@ function Signup() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/users/signup', {
+            const response = await axios.post(`${api.API_BASE_URL}/api/users/signup`, {
                 firstName,
                 lastName,
                 email,
                 password
             });
 
-            if (response.data && response.data.msg === 'User registered') {
+            if (response.data.token) {
                 window.location.href = "/login"; // Redirect to login page
             }
         } catch (err) {

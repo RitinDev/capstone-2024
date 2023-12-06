@@ -3,6 +3,7 @@ import '../styles/login.css';
 import axios from 'axios';
 import { useAuth } from '../context/authContext'
 import GlowingText from '../components/GlowingText';
+import api from '../utils/api';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+            const response = await axios.post(`${api.API_BASE_URL}/api/users/login`, { email, password });
             if (response.data && response.data.token) {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('userID', response.data.userID);

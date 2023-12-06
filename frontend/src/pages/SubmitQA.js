@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import api from '../utils/api';
 
 function SubmitQA() {
     const [question, setQuestion] = useState('');
@@ -13,7 +14,7 @@ function SubmitQA() {
         try {
             // Submit the question
             const questionResponse = await axios.post(
-                'http://localhost:5000/api/questions',
+                `${api.API_BASE_URL}/api/questions`,
                 { content: question },
                 { headers: { 'x-auth-token': token } }
             );
@@ -21,7 +22,7 @@ function SubmitQA() {
             if (questionResponse.data && questionResponse.data._id) {
                 // Use the returned question's ID to submit the answer
                 const answerResponse = await axios.post(
-                    'http://localhost:5000/api/answers',
+                    `${api.API_BASE_URL}/api/answers`,
                     { content: answer, associatedQuestion: questionResponse.data._id },
                     { headers: { 'x-auth-token': token } }
                 );
