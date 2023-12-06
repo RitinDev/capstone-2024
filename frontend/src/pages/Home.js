@@ -3,6 +3,7 @@ import { useAuth } from '../context/authContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faRandom, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Home.css';
+import GlowingText from '../components/GlowingText';
 
 const Home = () => {
     const { logout } = useAuth();
@@ -11,8 +12,8 @@ const Home = () => {
         <div className="container mt-5">
             <div className="d-flex justify-content-center">
                 <div className="col-md-6 text-center">
-                    <h2 className="home-header">Hello There!</h2>
-                    <p className="subtext">Select an action below:</p>
+                    <GlowingText text="ValidifyGPT" />
+                    <p className="subtext fs-5">Select an action below:</p>
 
                     <Link to="/submit-qa" className="custom-btn mb-3">
                         <FontAwesomeIcon icon={faEdit} size="2x" />

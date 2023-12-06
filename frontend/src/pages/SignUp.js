@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../styles/login.css'
 import axios from 'axios';
+import GlowingText from '../components/GlowingText';
 
 function Signup() {
     const [firstName, setFirstName] = useState('');
@@ -42,6 +43,7 @@ function Signup() {
                 <div className="col-12">
                     <div className="card bg-dark text-white my-5 mx-auto" style={{ borderRadius: '1rem', maxWidth: '400px' }}>
                         <div className="card-body p-5 d-flex flex-column align-items-center mx-auto w-100">
+                            <GlowingText text="ValidifyGPT" />
                             <h2 className="fw-bold mb-2 text-uppercase">Sign Up</h2>
                             <p className="text-white-50 mb-4">Create your account!</p>
 

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import '../styles/login.css';
 import axios from 'axios';
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/authContext'
+import GlowingText from '../components/GlowingText';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -34,6 +35,7 @@ function Login() {
                 <div className="col-12">
                     <div className="card bg-dark text-white my-5 mx-auto" style={{ borderRadius: '1rem', maxWidth: '400px' }}>
                         <div className="card-body p-5 d-flex flex-column align-items-center mx-auto w-100">
+                            <GlowingText text="ValidifyGPT" />
                             <h2 className="fw-bold mb-4 text-uppercase">Sign In</h2>
 
                             {error && <div className="alert alert-danger">{error}</div>}
