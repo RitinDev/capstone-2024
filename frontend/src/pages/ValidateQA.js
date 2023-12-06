@@ -86,8 +86,9 @@ const ValidateQA = () => {
                             </div>
                         </div>
 
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between mt-1"> {/* All buttons in a line */}
                             <button className="btn btn-success" onClick={validateQA}>Validate</button>
+                            <button className="btn btn-primary" onClick={fetchRandomQuestion}>Skip</button>
                             <button className="btn btn-light border" onClick={() => navigate('/')}>Back</button>
                         </div>
                     </form>
